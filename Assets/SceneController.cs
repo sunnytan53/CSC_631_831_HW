@@ -6,8 +6,7 @@ using UnityEngine;
 public class SceneController : MonoBehaviour {
     public Camera camera1;
     public Camera camera2;
-    
-
+    public int score = 0;
 
     void Start() {
         camera1.enabled = true;
@@ -18,6 +17,10 @@ public class SceneController : MonoBehaviour {
     private string sceneText = "Go To Menu";
     // private string sceneName1 = "Game";
     private string sceneName2 = "Menu";
+
+    public void updateScore(int gain){
+        score += gain;
+    }
 
     void OnGUI()
     {
@@ -32,6 +35,8 @@ public class SceneController : MonoBehaviour {
             SceneManager.LoadScene("Scenes/" + sceneName2);
         }
 
+        GUI.Button(new Rect(10, 100, 150, 30), "Points: " + score.ToString());
+        
         /***
         if (GUI.Button(new Rect(150, 150, 150, 40), "Click Tree!"))
         {
