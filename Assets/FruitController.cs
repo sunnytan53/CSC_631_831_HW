@@ -5,31 +5,26 @@ public class FruitController : MonoBehaviour {
     private GameObject fruit;
     private Rigidbody rb;
     private SceneController sc;
+    private ParticleSystem ps;
 
-    void Start() {
+
+    void Awake() {
         sc = GameObject.Find("SceneController").GetComponent<SceneController>();
-        // Create a fruit and attach it to the tree
+        ps = GameObject.Find("ParticleCollision").GetComponent<ParticleSystem>();
         fruit = gameObject;
         rb = fruit.GetComponent<Rigidbody>();
-        // Set a timer for 2 seconds
         float timer = 2f;
         rb.useGravity = false;
-        // rb.isKinematic = true;
-        // fruit.GetComponent<SphereCollider>().isTrigger = false;
+        Debug.Log("Fruit is falling");
         StartCoroutine(DropFruit(fruit, timer));
     }
     
     IEnumerator DropFruit(GameObject fruit, float timer) {
-        // Detach the fruit from the tree and apply physics
         yield return new WaitForSeconds(timer);
-        // fruit.transform.parent = null;
-        // Rigidbody rb = fruit.GetComponent<Rigidbody>();
-        // rb.isKinematic = false;
         rb.useGravity = true;
     }
 
     IEnumerator Wait(float timer) {
-        // Detach the fruit from the tree and apply physics
         yield return new WaitForSeconds(timer);
         Destroy(gameObject);
     }
@@ -37,10 +32,12 @@ public class FruitController : MonoBehaviour {
     void OnCollisionEnter(Collision other)
     {
         float timer = 10f;
-        Debug.Log("Collision with: " + other.gameObject.name);
+        Debug.Log("Fruit Collision with: " + other.gameObject.name);
+        ps.transform.position = other.contacts[0].point;
+        ps.Play();
         if (other.gameObject.CompareTag("Floor"))
         {
-            // StartCoroutine(Wait(timer));
+            StartCoroutine(Wait(timer));
         }
     }
 
@@ -54,18 +51,10 @@ public class FruitController : MonoBehaviour {
             // Get the game object that was hit by the ray
             GameObject clickedObject = hit.collider.gameObject;
 
-            // Perform some action in response to the click
             Debug.Log("Clicked on game object name: " + clickedObject.name);
 
             if (clickedObject.CompareTag("Fruit"))
             {
-                // Play collect effect
-                // Instantiate(collectEffect, transform.position, Quaternion.identity);
-
-                // Add points to score
-                // ScoreManager.Instance.AddPoints(points);
-
-                // Destroy fruit
                 float mouseX = mousePosition.x - 5;
                 float mouseY = mousePosition.y + 5;
                 float mouseZ = mousePosition.z;

@@ -7,9 +7,12 @@ public class KeyMove : MonoBehaviour {
 
     // moving CharacterController for collision detection instead of transform
     private CharacterController _charController;
+    private ParticleSystem ps;
 
     void Start(){
         _charController = GetComponent<CharacterController>();
+        ps = GameObject.Find("ParticleCollision").GetComponent<ParticleSystem>();
+
     }
 
     void Update(){
@@ -26,5 +29,15 @@ public class KeyMove : MonoBehaviour {
         movement *= Time.deltaTime;
         movement = transform.TransformDirection(movement);
         _charController.Move(movement);
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (!hit.gameObject.CompareTag("Floor"))
+        {
+            Debug.Log("Character Collision with: " + hit.gameObject.name);
+            ps.transform.position = hit.point;
+            ps.Play();
+        }
     }
 }

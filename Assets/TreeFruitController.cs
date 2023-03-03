@@ -6,6 +6,11 @@ public class TreeFruitController : MonoBehaviour {
     public GameObject fruitPrefab;
     private GameObject fruit;
     private Rigidbody rb;
+    private ParticleSystem ps;
+
+    void Start(){
+        ps = GameObject.Find("ParticleCollision").GetComponent<ParticleSystem>();
+    }
 
     void OnMouseDown()
     {
@@ -22,30 +27,22 @@ public class TreeFruitController : MonoBehaviour {
 
             if (clickedObject.CompareTag("Tree"))
             {
-                // Spawn new fruit prefab
-                /****
-                GameObject newFruit = Instantiate(gameObject.transform.GetChild(0).gameObject, transform.position, Quaternion.identity);
-                newFruit.GetComponent<Rigidbody>().isKinematic = true;
-                newFruit.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.Continuous;
-                newFruit.GetComponent<BoxCollider>().isTrigger = true;
-                ***/
-                
                 System.Random rand = new System.Random();
                 int randomX = rand.Next(-5,6);
                 int randomY = rand.Next(8,15);
                 int randomZ = rand.Next(-5,6);
                 Vector3 proPosition = new Vector3(randomX, randomY, randomZ);
-                // Instantiate the prefab at the mouse click position
+                // Instantiate the prefab at the random position
                 fruit = Instantiate(fruitPrefab, proPosition, Quaternion.identity);
-                Rigidbody rb = fruit.GetComponent<Rigidbody>();
-                // Set a timer for 2 seconds
-                float timer = 2f;
-                rb.isKinematic = true;
-                rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-                // rb.GetComponent<SphereCollider>().isTrigger = true;
-                // StartCoroutine(DropFruit(fruit, timer));
             }
         }       
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("Tree Collision with: " + other.gameObject.name);
+        ps.transform.position = other.contacts[0].point;
+        ps.Play();
     }
 
 }
