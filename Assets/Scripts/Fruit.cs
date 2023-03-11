@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class Fruit : MonoBehaviour
 {
-    void OnMouseOver()
+    void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision collision)

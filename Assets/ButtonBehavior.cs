@@ -17,7 +17,7 @@ public class ButtonBehavior : MonoBehaviour
     }
 
     void OnMouseDown(){
-        Debug.Log("Cube");
+        Debug.Log("Mouse on tree");
         changeMaterial();
         fire.Play();
     }
