@@ -13,7 +13,7 @@ public class FruitController : MonoBehaviour {
         ps = GameObject.Find("ParticleCollision").GetComponent<ParticleSystem>();
         fruit = gameObject;
         rb = fruit.GetComponent<Rigidbody>();
-        float timer = 2f;
+        float timer = 5f;
         rb.useGravity = false;
         Debug.Log("Fruit is falling");
         StartCoroutine(DropFruit(fruit, timer));
@@ -31,7 +31,7 @@ public class FruitController : MonoBehaviour {
     
     void OnCollisionEnter(Collision other)
     {
-        float timer = 10f;
+        float timer = 2f;
         Debug.Log("Fruit Collision with: " + other.gameObject.name);
         ps.transform.position = other.contacts[0].point;
         ps.Play();
