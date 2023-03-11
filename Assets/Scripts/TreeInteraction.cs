@@ -24,7 +24,7 @@ public class TreeInteraction : MonoBehaviour
             pos.y += 10;
             pos.x += Random.Range(-distance, distance);
             pos.z += Random.Range(-distance, distance);
-            GameObject.Instantiate(objectToSpawn, pos, transform.rotation);
+            Instantiate(objectToSpawn, pos, transform.rotation);
         }
     }
 }

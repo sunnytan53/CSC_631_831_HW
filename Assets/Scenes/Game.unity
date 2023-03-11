@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6253e84108a14cf393bb43d6878c501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 31955988}
+  player: {fileID: 1529840538}
   objectToSpawn: {fileID: 1829371231341652, guid: 426b44a7575f71e479fab4f4e8431989, type: 3}
   distance: 5
 --- !u!4 &31955988 stripped
