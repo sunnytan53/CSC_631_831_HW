@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 505ac5026ce7847b6a65fee8b680b6ab
+  - enabled: 1
+    path: Assets/Scenes/GameNight.unity
+    guid: c36af09d80457564e9a6c2a2c9438241
   m_configObjects: {}

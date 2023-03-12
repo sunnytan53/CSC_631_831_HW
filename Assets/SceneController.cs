@@ -14,9 +14,7 @@ public class SceneController : MonoBehaviour {
     }
 
     private string cameraText = "Change Camera";
-    private string sceneText = "Go To Menu";
-    // private string sceneName1 = "Game";
-    private string sceneName2 = "Menu";
+    private string sceneText = "Change Day Night";
 
     public void updateScore(int gain){
         score += gain;
@@ -30,9 +28,14 @@ public class SceneController : MonoBehaviour {
             camera2.enabled = !camera2.enabled;
         }
 
+        string activeScene = SceneManager.GetActiveScene().name;
+        bool isFirstScene = (activeScene == "Game");
+        string sceneName2 = isFirstScene ? "GameNight" : "Game";
+
         if (GUI.Button(new Rect(10, 60, 150, 30), sceneText))
         {
             SceneManager.LoadScene("Scenes/" + sceneName2);
+            Debug.Log("sceneName2 is: " + sceneName2);
         }
 
         GUI.Button(new Rect(10, 100, 150, 30), "Points: " + score.ToString());
